@@ -1,0 +1,174 @@
+openapi: 3.0.0
+info:
+  version: "1.0.0"
+  title: "Lease Application"
+  description: 'Lease Application Open API Specifications'
+
+servers:
+  - url: http://localhost:8080/api/
+    description: backend Server
+tags:
+  - name: customer
+    description: Customer Management
+  - name: leasingContract
+    description: LeasingContract Management
+  - name: vehicle
+    description: Vehicle Management
+  - name: contractOverview
+    description: Contract overview Management
+paths:
+
+  /customer/get/{id}:
+    get:
+      tags:
+        - customer
+      description: 'Get customer by id'
+      operationId: getCustomer
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: 'Customer id'
+      responses:
+        200:
+          description: 'Customer is Successfully returned'
+          content:
+            application/json:
+              schema:
+                $ref: 'dto/models.yaml#/definitions/Customer'
+        404:
+          description: 'Page not found'
+
+  /customer/save:
+    post:
+      tags:
+        - customer
+      description: 'Save or edit the customer'
+      operationId: saveCustomer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: 'dto/models.yaml#/definitions/Customer'
+      responses:
+        200:
+          description: 'Customer successfully saved'
+        404:
+          description: 'Page not found'
+
+  /vehicle/get/{id}:
+    get:
+      tags:
+        - vehicle
+      description: 'Get vehicle by id'
+      operationId: getVehicle
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: 'Vehicle id'
+      responses:
+        200:
+          description: 'Vehicle is Successfully returned'
+          content:
+            application/json:
+              schema:
+                $ref: 'dto/models.yaml#/definitions/Vehicle'
+        404:
+          description: 'Page not found'
+
+  /vehicle/save:
+    post:
+      tags:
+        - vehicle
+      description: 'Save or edit the vehicle'
+      operationId: saveVehicle
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: 'dto/models.yaml#/definitions/Vehicle'
+      responses:
+        200:
+          description: 'Vehicle successfully saved'
+        404:
+          description: 'Page not found'
+
+  /leasingContract/get/{id}:
+    get:
+      tags:
+        - leasingContract
+      description: 'Get leasingContract by id'
+      operationId: getLeasingContract
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: 'LeasingContract id'
+      responses:
+        200:
+          description: 'LeasingContract is Successfully returned'
+          content:
+            application/json:
+              schema:
+                $ref: 'dto/models.yaml#/definitions/LeasingContract'
+        404:
+          description: 'Page not found'
+
+  /leasingContract/save:
+    post:
+      tags:
+        - leasingContract
+      description: 'Save or edit the leasingContract'
+      operationId: saveLeasingContract
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: 'dto/models.yaml#/definitions/LeasingContract'
+      responses:
+        200:
+          description: 'LeasingContract successfully saved'
+        404:
+          description: 'Page not found'
+
+  /contractOverview/getAll:
+    get:
+      tags:
+        - contractOverview
+      description: 'Get all contractOverview'
+      operationId: getAllContractOverviews
+      parameters:
+        - in: query
+          name: page
+          required: true
+          schema:
+            type: integer
+          description: The number of pages in the result set.
+        - in: query
+          name: size
+          required: true
+          schema:
+            type: integer
+          description: The numbers of items to return in one page.
+      responses:
+        200:
+          description: successfully loaded all contractOverviews
+          content:
+            application/json:
+              schema:
+                $ref: 'dto/models.yaml#/definitions/ContractOverviews'
+        404:
+          description: 'Page not found'

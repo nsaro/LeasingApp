@@ -14,7 +14,7 @@
 
         In the root directory of the project run the below commands
         
-        ./gradlew test
+        gradle test
 
 # How to run Leasing Application using Docker compose file #
 
